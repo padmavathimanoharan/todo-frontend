@@ -4,10 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { addTodo } from "../api/todoApi";
 
 interface Todo {
   title: string;
   description: string;
+  completed: boolean;
 }
 
 interface AddTodoFormProps {
@@ -24,8 +26,10 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
       title: Yup.string().required("Title is required"),
       description: Yup.string().required("Description is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      //call the function which adds this to the database
+      const response = await addTodo(values);
+      console.log(response);
     },
   });
 
