@@ -1,7 +1,9 @@
-import React from "react";
+import { useState } from 'react';
+import AddTodo from './pages/AddTodo';
 
 const App = () => {
-  return <div>App</div>;
-};
+  const[todo, setTodo] = useState();
+  return <AddTodo />;
+}
 
-export default App;
+export default App
