@@ -1,9 +1,17 @@
-import { useState } from 'react';
-import AddTodo from './pages/AddTodo';
+import React from "react";
+import { useState } from "react";
+import AddTodo from "./pages/AddTodo";
+import TodoList from "./pages/TodoList";
 
 const App = () => {
-  const[todo, setTodo] = useState();
-  return <AddTodo />;
-}
+  const [todo, setTodo] = useState();
 
-export default App
+  return (
+    <>
+      <AddTodo />
+      <TodoList />
+    </>
+  );
+};
+
+export default App;

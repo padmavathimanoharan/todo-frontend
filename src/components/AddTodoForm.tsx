@@ -5,12 +5,7 @@ import * as Yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { addTodo } from "../api/todoApi";
-
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import { Todo } from "../types/todo.types";
 
 interface AddTodoFormProps {
   onSubmit: (values: Todo) => void;
