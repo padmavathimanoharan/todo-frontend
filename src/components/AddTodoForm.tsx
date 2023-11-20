@@ -14,10 +14,8 @@ interface AddTodoFormProps {
 const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues: {
-      _id: "",
       title: "",
       description: "",
-      completed: false,
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Title is required"),
