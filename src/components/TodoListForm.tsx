@@ -56,7 +56,7 @@ const TodoListForm: React.FC = () => {
   const handleInputChange = (field: string, value: string | boolean) => {
     setEditedValues((prevValues) => ({
       ...prevValues,
-      [field]: value,
+      [field]: field === "completed" ? Boolean(value) : String(value),
     }));
   };
 

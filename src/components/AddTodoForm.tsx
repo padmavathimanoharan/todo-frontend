@@ -5,10 +5,10 @@ import * as Yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { addTodo } from "../api/todoApi";
-import { Todo } from "../types/todo.types";
+import { TodoType } from "../types/todo.types"; // Make sure this import is correct
 
 interface AddTodoFormProps {
-  onSubmit: (values: Todo) => void;
+  onSubmit: (values: TodoType) => void;
 }
 
 const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
@@ -21,14 +21,17 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
       title: Yup.string().required("Title is required"),
       description: Yup.string().required("Description is required"),
     }),
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       try {
         // Call the function which adds this to the database
         const response = await addTodo(values);
         console.log(response);
 
+        // Call the provided onSubmit function
+        onSubmit(values);
+
         // Reset the form after successfully saving the todo
-        resetForm();
+        formik.resetForm();
       } catch (error) {
         console.error("Error adding todo:", error);
       }
