@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, ListGroup, Image } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
 import { getTodo, deleteTodo, updateTodo } from "../api/todoApi";
 import { TodoType } from "../types/todo.types";
 
@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const TodoListForm: React.FC = () => {
   const [todo, setTodo] = useState<TodoType[]>([]);
+  const [editableTodoId, setEditableTodoId] = useState<string | null>(null);
+  const [editedValues, setEditedValues] = useState<Partial<TodoType>>({});
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -33,47 +35,116 @@ const TodoListForm: React.FC = () => {
 
   const handleUpdate = async (todoId: string) => {
     try {
-      // Replace the following line with your logic for updating todos
-      const updatedTodoData = {
-        /* Your updated todo data */
-      };
-      await updateTodo(todoId, updatedTodoData);
+      await updateTodo(todoId, editedValues);
       const updatedTodo = await getTodo();
       setTodo(updatedTodo);
+      setEditableTodoId(null);
+      setEditedValues({});
     } catch (error) {
       console.error("Error updating todo:", error);
     }
   };
 
+  const handleEditClick = (todoId: string) => {
+    setEditableTodoId(todoId);
+  };
+
+  const isEditable = (todoId: string) => {
+    return editableTodoId === todoId;
+  };
+
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setEditedValues((prevValues) => ({
+      ...prevValues,
+      [field]: value,
+    }));
+  };
+
   return (
     <Container fluid className="todo-list-form" style={{ maxWidth: "600px" }}>
-      <ListGroup>
-        {todo.map((todo, index) => (
-          <ListGroup.Item
-            key={index}
-            className="d-flex justify-content-between align-items-center"
-          >
-            <div>
-              <h4>{todo.title}</h4>
-              <p>{todo.description}</p>
-              <p>{todo.completed ? "Completed" : "Not Completed"}</p>
-            </div>
-            <div>
-              <Image
-                src="/src/assets/delete-icon.png"
-                alt="Delete"
-                onClick={() => handleDelete(todo._id)}
-              />
-              <Image
-                src="/src/assets/edit-icon.png"
-                alt="Update"
-                className="mr-2"
-                onClick={() => handleUpdate(todo._id)}
-              />
-            </div>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+      {todo.length > 0 ? (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Completed</th>
+              <th>Delete</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {todo.map((todo, index) => (
+              <tr key={index}>
+                <td>
+                  {isEditable(todo._id) ? (
+                    <input
+                      type="text"
+                      value={editedValues.title || todo.title}
+                      onChange={(e) =>
+                        handleInputChange("title", e.target.value)
+                      }
+                    />
+                  ) : (
+                    <span>{todo.title}</span>
+                  )}
+                </td>
+                <td>
+                  {isEditable(todo._id) ? (
+                    <textarea
+                      value={editedValues.description || todo.description}
+                      onChange={(e) =>
+                        handleInputChange("description", e.target.value)
+                      }
+                    />
+                  ) : (
+                    <span>{todo.description}</span>
+                  )}
+                </td>
+                <td>
+                  {isEditable(todo._id) ? (
+                    <input
+                      type="checkbox"
+                      checked={
+                        editedValues.completed !== undefined
+                          ? editedValues.completed
+                          : todo.completed
+                      }
+                      onChange={() =>
+                        handleInputChange("completed", !editedValues.completed)
+                      }
+                    />
+                  ) : (
+                    <span>{todo.completed ? "Yes" : "No"}</span>
+                  )}
+                </td>
+                <td>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDelete(todo._id)}
+                  >
+                    Delete
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    variant={isEditable(todo._id) ? "success" : "primary"}
+                    onClick={() =>
+                      isEditable(todo._id)
+                        ? handleUpdate(todo._id)
+                        : handleEditClick(todo._id)
+                    }
+                  >
+                    {isEditable(todo._id) ? "Save" : "Edit"}
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <p>No todo's available.</p>
+      )}
     </Container>
   );
 };
