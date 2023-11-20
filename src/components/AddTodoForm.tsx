@@ -21,10 +21,17 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
       title: Yup.string().required("Title is required"),
       description: Yup.string().required("Description is required"),
     }),
-    onSubmit: async (values) => {
-      //call the function which adds this to the database
-      const response = await addTodo(values);
-      console.log(response);
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        // Call the function which adds this to the database
+        const response = await addTodo(values);
+        console.log(response);
+
+        // Reset the form after successfully saving the todo
+        resetForm();
+      } catch (error) {
+        console.error("Error adding todo:", error);
+      }
     },
   });
 

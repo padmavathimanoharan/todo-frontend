@@ -19,7 +19,7 @@ const TodoListForm: React.FC = () => {
     };
 
     fetchTodo();
-  }, []);
+  }, [todo]);
 
   const handleDelete = async (todoId: string) => {
     try {
@@ -62,13 +62,13 @@ const TodoListForm: React.FC = () => {
               <Image
                 src="/src/assets/delete-icon.png"
                 alt="Delete"
-                onClick={() => handleDelete(todo.id)}
+                onClick={() => handleDelete(todo._id)}
               />
               <Image
                 src="/src/assets/edit-icon.png"
                 alt="Update"
                 className="mr-2"
-                onClick={() => handleUpdate(todo.id)}
+                onClick={() => handleUpdate(todo._id)}
               />
             </div>
           </ListGroup.Item>
