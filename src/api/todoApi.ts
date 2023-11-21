@@ -8,7 +8,7 @@ const DELETE_TODO_ENDPOINT = `${TODO_API_URL}`;
 const UPDATE_TODO_ENDPOINT = `${TODO_API_URL}`;
 const GET_TODO_ENDPOINT = `${TODO_API_URL}`;
 
-export const addTodo = async (todoData: TodoType) => {
+export const addTodo = async (todoData: any) => {
   try {
     const response = await axios.post(ADD_TODO_ENDPOINT, todoData);
     return response.data;

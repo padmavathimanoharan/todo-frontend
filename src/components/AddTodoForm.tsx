@@ -5,10 +5,10 @@ import * as Yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { addTodo } from "../api/todoApi";
-import { TodoType } from "../types/todo.types"; // Make sure this import is correct
+// import { TodoType } from "../types/todo.types"; // Make sure this import is correct
 
 interface AddTodoFormProps {
-  onSubmit: (values: TodoType) => void;
+  onSubmit: (values: any) => void;
 }
 
 const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
