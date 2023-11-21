@@ -1,27 +1,17 @@
-# React + TypeScript + Vite
+# Todo Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### [Live Demo](https://padma-todo-react-app.netlify.app/)
+![image](https://github.com/padmavathimanoharan/todo-frontend/assets/126838291/611ab27d-1863-4010-8375-6f410f02948c)
 
-Currently, two official plugins are available:
+#### 📝 Description
+Created a ToDo App to showcase my programming projects.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### 💡 Features
+* Add Todo
+* Edit Todo
+* Delete Todo
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### 🛠️ Built with 
+ * React 
+ * Typescript
+ * Mongo DB
