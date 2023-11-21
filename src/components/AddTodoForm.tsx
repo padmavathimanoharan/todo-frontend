@@ -16,6 +16,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
     initialValues: {
       title: "",
       description: "",
+      completed: false,
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Title is required"),
