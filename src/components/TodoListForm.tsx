@@ -35,7 +35,7 @@ const TodoListForm: React.FC = () => {
 
   const handleUpdate = async (todoId: string) => {
     try {
-      await updateTodo(todoId, editedValues);
+      await updateTodo(todoId, editedValues as TodoType);
       const updatedTodo = await getTodo();
       setTodo(updatedTodo);
       setEditableTodoId(null);
