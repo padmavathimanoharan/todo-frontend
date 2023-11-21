@@ -8,7 +8,7 @@ import { addTodo } from "../api/todoApi";
 import { TodoType } from "../types/todo.types"; // Make sure this import is correct
 
 interface AddTodoFormProps {
-  onSubmit: (values: TodoType) => void;
+  onSubmit: (values: Omit<TodoType, "_id">) => void;
 }
 
 const AddTodoForm: React.FC<AddTodoFormProps> = ({ onSubmit }) => {
