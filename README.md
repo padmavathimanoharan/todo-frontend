@@ -4,7 +4,7 @@
 ![image](https://github.com/padmavathimanoharan/todo-frontend/assets/126838291/611ab27d-1863-4010-8375-6f410f02948c)
 
 #### 📝 Description
-Created a ToDo App to showcase my programming projects.
+Created a ToDo App
 
 #### 💡 Features
 * Add Todo
